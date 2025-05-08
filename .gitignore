@@ -16,6 +16,10 @@ object_script.*.Debug
 *_plugin_import.cpp
 /.qmake.cache
 /.qmake.stash
+<<<<<<< HEAD
+=======
+/build
+>>>>>>> 779da09 (fist, initial commit)
 *.pro.user
 *.pro.user.*
 *.qbs.user
