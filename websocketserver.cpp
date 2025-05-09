@@ -47,12 +47,6 @@ void WebSocketServer::onNewConnection()
     emit signalNewConnection(socket);
     qInfo() << "Client connected from" << socket->peerAddress().toString();
 
-
     connect(socket, &QWebSocket::disconnected,
             socket, &QWebSocket::deleteLater);
-}
-
-
-void WebSocketServer::processTextMessage(const QString &message) {
-
 }

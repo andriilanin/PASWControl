@@ -20,7 +20,7 @@ signals:
 
 public slots:
     void onNewConnection();
-    void processTextMessage(const QString &message);
+
 
 private:
     QWebSocketServer *m_server;
