@@ -13,15 +13,19 @@ public:
                              const QString &certPath,
                              const QString &keyPath,
                              QObject *parent = nullptr);
+    QWebSocket* socket;
 
 signals:
-    void newConnection();
+    void signalNewConnection(QWebSocket *socket);
 
 public slots:
     void onNewConnection();
+    void processTextMessage(const QString &message);
 
 private:
     QWebSocketServer *m_server;
+
+
 };
 
 #endif // WEBSOCKETSERVER_H

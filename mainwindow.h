@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "vjoydevice.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,10 +18,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-
+public slots:
+    void processReceivedData(const QString &message);
 
 private:
     Ui::MainWindow *ui;
-
+    VJoyDevice* joyEmu = nullptr;
 };
 #endif // MAINWINDOW_H

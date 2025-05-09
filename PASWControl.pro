@@ -15,10 +15,12 @@ LIBS += -L$$PWD/vJoySDK/inc -lvJoyInterface
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    vjoydevice.cpp \
     websocketserver.cpp
 
 HEADERS += \
     mainwindow.h \
+    vjoydevice.h \
     websocketserver.h
 
 FORMS += \

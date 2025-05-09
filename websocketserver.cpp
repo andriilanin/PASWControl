@@ -2,6 +2,7 @@
 #include <QSslCertificate>
 #include <QSslKey>
 #include <QFile>
+
 #include <QDebug>
 
 WebSocketServer::WebSocketServer(quint16 port,
@@ -41,17 +42,17 @@ WebSocketServer::WebSocketServer(quint16 port,
 
 void WebSocketServer::onNewConnection()
 {
-    emit newConnection();
-    QWebSocket *socket = m_server->nextPendingConnection();
 
+    socket = m_server->nextPendingConnection();
+    emit signalNewConnection(socket);
     qInfo() << "Client connected from" << socket->peerAddress().toString();
 
-    connect(socket, &QWebSocket::textMessageReceived,
-            this, [](const QString &message) {
-                qInfo() << "Received:" << message;
-                // socket->sendTextMessage(message);
-            });
 
     connect(socket, &QWebSocket::disconnected,
             socket, &QWebSocket::deleteLater);
+}
+
+
+void WebSocketServer::processTextMessage(const QString &message) {
+
 }
