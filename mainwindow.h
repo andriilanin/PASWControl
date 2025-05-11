@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "vjoydevice.h"
+#include <QWebSocket>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,8 +19,15 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void UserConnected(QWebSocket *socket);
+    void UserDisconnected();
+
 public slots:
+    void onUserConnected(QWebSocket *socket);
+    void onUserDisconnected();
     void processReceivedData(const QString &message);
+
 
 private:
     Ui::MainWindow *ui;

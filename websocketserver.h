@@ -16,10 +16,12 @@ public:
     QWebSocket* socket;
 
 signals:
-    void signalNewConnection(QWebSocket *socket);
+    void userConnected(QWebSocket *socket);
+    void userDisconnected();
 
 public slots:
     void onNewConnection();
+    void onDisconnected();
 
 
 private:

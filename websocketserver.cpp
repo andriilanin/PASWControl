@@ -42,11 +42,13 @@ WebSocketServer::WebSocketServer(quint16 port,
 
 void WebSocketServer::onNewConnection()
 {
-
     socket = m_server->nextPendingConnection();
-    emit signalNewConnection(socket);
+    emit userConnected(socket);
     qInfo() << "Client connected from" << socket->peerAddress().toString();
-
-    connect(socket, &QWebSocket::disconnected,
-            socket, &QWebSocket::deleteLater);
+    connect(socket, &QWebSocket::disconnected, socket, &QWebSocket::deleteLater);
+    connect(socket, &QWebSocket::disconnected, this, &WebSocketServer::onDisconnected);
 }
+
+void WebSocketServer::onDisconnected() {
+    emit userDisconnected();
+};

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QWebSocket>
 #include <QJsonDocument>
 #include <QJsonObject>
 
@@ -38,4 +39,17 @@ void MainWindow::processReceivedData(const QString &message) {
     qDebug() << "Tilt:" << y
              << "Pedals:" << clutch << brake << gas;
 }
+
+void MainWindow::onUserConnected(QWebSocket *socket) {
+    ui->connectionStatusLabel->setText("connected");
+    connect(socket, &QWebSocket::textMessageReceived, this, &MainWindow::processReceivedData);
+};
+
+void MainWindow::onUserDisconnected() {
+    ui->connectionStatusLabel->setText("disconnected");
+};
+
+
+
+
 

@@ -2,6 +2,7 @@
 
 #include <QApplication>
 #include "websocketserver.h"
+#include <QProcess>
 
 
 int main(int argc, char *argv[])
@@ -10,16 +11,32 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    WebSocketServer* server = new WebSocketServer(12345,
-                           "E:/Desktop/Projects/PASWControl/site/certFiles/certificate.pem",
-                           "E:/Desktop/Projects/PASWControl/site/certFiles/privatekey.pem");
-    // QObject::connect(server, &WebSocketServer::newConnection, &w, [&](){
-    //     QObject::connect(server.socket, &QWebSocket::textMessageReceived, &w, &MainWindow::processReceivedData);
+    QProcess *nodeProcess = new QProcess();
+    nodeProcess->setWorkingDirectory("site/");
+    QString scriptPath = "siteServer.js";  // Full path to your Node.js server script
+    QString nodeExecutable = "node"; // Or full path to node.exe if needed
+
+    // QObject::connect(nodeProcess, &QProcess::readyReadStandardOutput, [=]() {
+    //     qDebug() << "Node stdout:" << nodeProcess->readAllStandardOutput();
     // });
-    QObject::connect(server, &WebSocketServer::signalNewConnection, &w, [&](QWebSocket *socket){
-        QObject::connect(socket, &QWebSocket::textMessageReceived, &w, &MainWindow::processReceivedData);
+    // QObject::connect(nodeProcess, &QProcess::readyReadStandardError, [=]() {
+    //     qDebug() << "Node stderr:" << nodeProcess->readAllStandardError();
+    // });
+
+    nodeProcess->start(nodeExecutable, QStringList() << scriptPath);
+
+
+    WebSocketServer* server = new WebSocketServer(12345,
+                           "site/certFiles/certificate.pem",
+                           "site/certFiles/privatekey.pem");
+
+    QObject::connect(server, &WebSocketServer::userConnected, &w, &MainWindow::onUserConnected);
+    QObject::connect(server, &WebSocketServer::userDisconnected, &w, &MainWindow::onUserDisconnected);
+
+    QObject::connect(&a, &QCoreApplication::aboutToQuit, [=]() {
+        qDebug() << "Terminating site server";
+        nodeProcess->close();
     });
-    // QObject::connect(server.socket, &QWebSocket::textMessageReceived, &w, &MainWindow::processReceivedData);
 
     return a.exec();
 }
