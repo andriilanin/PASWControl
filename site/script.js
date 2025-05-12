@@ -1,5 +1,13 @@
-const WS_URL = 'wss://192.168.31.176:12345/';
-const ws = new WebSocket(WS_URL);
+let hostIP;
+fetch('/hostIP')
+    .then(res => res.json())
+    .then(data => {
+        hostIP = data.hostIP;
+        const WS_URL = `wss://${hostIP}:12345/`;
+        const ws = new WebSocket(WS_URL);
+    })
+    .catch(err => console.error('Ошибка получения hostIP:', err));
+
 //const wsState = document.getElementById('wsState');
 
 //ws.addEventListener('open', () => { wsState.textContent = 'Подключено'; });

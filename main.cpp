@@ -13,18 +13,9 @@ int main(int argc, char *argv[])
 
     QProcess *nodeProcess = new QProcess();
     nodeProcess->setWorkingDirectory("site/");
-    QString scriptPath = "siteServer.js";  // Full path to your Node.js server script
-    QString nodeExecutable = "node"; // Or full path to node.exe if needed
-
-    // QObject::connect(nodeProcess, &QProcess::readyReadStandardOutput, [=]() {
-    //     qDebug() << "Node stdout:" << nodeProcess->readAllStandardOutput();
-    // });
-    // QObject::connect(nodeProcess, &QProcess::readyReadStandardError, [=]() {
-    //     qDebug() << "Node stderr:" << nodeProcess->readAllStandardError();
-    // });
-
+    QString scriptPath = "siteServer.js";
+    QString nodeExecutable = "node";
     nodeProcess->start(nodeExecutable, QStringList() << scriptPath);
-
 
     WebSocketServer* server = new WebSocketServer(12345,
                            "site/certFiles/certificate.pem",
@@ -34,7 +25,6 @@ int main(int argc, char *argv[])
     QObject::connect(server, &WebSocketServer::userDisconnected, &w, &MainWindow::onUserDisconnected);
 
     QObject::connect(&a, &QCoreApplication::aboutToQuit, [=]() {
-        qDebug() << "Terminating site server";
         nodeProcess->close();
     });
 
