@@ -1,34 +1,64 @@
 let hostIP;
+let ws;
 fetch('/hostIP')
     .then(res => res.json())
     .then(data => {
         hostIP = data.hostIP;
         const WS_URL = `wss://${hostIP}:12345/`;
-        const ws = new WebSocket(WS_URL);
+        ws = new WebSocket(WS_URL);
     })
-    .catch(err => console.error('Ошибка получения hostIP:', err));
-
-//const wsState = document.getElementById('wsState');
-
-//ws.addEventListener('open', () => { wsState.textContent = 'Подключено'; });
-//ws.addEventListener('close', () => { wsState.textContent = 'Отключено'; });
-//ws.addEventListener('error', () => { wsState.textContent = 'Ошибка'; });
+    .catch(err => console.error('error receiving hostIP:', err));
 
 let tilt = { x: 0, y: 0, z: 0 };
 let pedals = { gas: 0, brake: 0, clutch: 0 };
+let pressedButton = "";
 
-// Обновление отображения значений
-function updateDisplay(id, val) {
-    document.getElementById('val' + id.charAt(0).toUpperCase() + id.slice(1))
-        .textContent = val.toFixed(2);
+function setupSlider(sliderElem, id) {
+    const thumb = sliderElem.querySelector('.thumb');
+    const width = sliderElem.clientWidth;
+
+    function setValueFromX(x) {
+        const rect = sliderElem.getBoundingClientRect();
+        let relativeX = x - rect.left;
+        relativeX = Math.max(0, Math.min(relativeX, width-70));
+        const rawValue = relativeX / width;
+        const value255 = Math.round(rawValue * 300);
+        pedals[id] = value255;
+        thumb.style.left = `${rawValue * 100}%`;
+    }
+
+    sliderElem.addEventListener('pointerdown', e => {
+        e.preventDefault();
+        sliderElem.setPointerCapture(e.pointerId);
+        setValueFromX(e.clientX);
+    });
+
+    sliderElem.addEventListener('pointermove', e => {
+        if (e.buttons) {
+            setValueFromX(e.clientX);
+        }
+    });
 }
 
-['gas', 'brake', 'clutch'].forEach(id => {
-    const el = document.getElementById(id);
-    el.addEventListener('input', () => {
-        pedals[id] = parseFloat(el.value);
-        updateDisplay(id, pedals[id]);
-    });
+document.querySelectorAll('.custom-slider').forEach(slider => {
+    const id = slider.getAttribute('id');
+    setupSlider(slider, id);
+});
+
+document.getElementById('btn1').addEventListener('pointerdown', () => {
+    pressedButton = "btn1";
+});
+
+document.getElementById('btn2').addEventListener('pointerdown', () => {
+    pressedButton = "btn2";
+});
+
+document.getElementById('btn3').addEventListener('pointerdown', () => {
+    pressedButton = "btn3";
+});
+
+document.getElementById('btn4').addEventListener('pointerdown', () => {
+    pressedButton = "btn4";
 });
 
 document.getElementById('btnPerms').addEventListener('click', () => {
@@ -44,7 +74,7 @@ document.getElementById('btnPerms').addEventListener('click', () => {
                         tilt.z = ev.accelerationIncludingGravity.z ? (ev.accelerationIncludingGravity.z) : 0;
                     });
                 } else {
-                    alert('Доступ к датчикам отклонён');
+                    alert('sensors permission denied');
                 }
             })
             .catch(err => console.error(err));
@@ -53,6 +83,7 @@ document.getElementById('btnPerms').addEventListener('click', () => {
 
 setInterval(() => {
     if (ws.readyState !== WebSocket.OPEN) return;
-    const msg = { type: 'sensor_update', tilt, pedals, timestamp: Date.now() };
+    const msg = { type: 'sensor_update', tilt, pedals, pressedButton, timestamp: Date.now() };
     ws.send(JSON.stringify(msg));
+    pressedButton = "";
 }, 50);

@@ -2,105 +2,66 @@ body {
     background-color: black;
 }
 
+.mainWrapper {
+    display: flex;
+}
+
+#btnPerms {
+    width: 280px;
+    height: 660px;
+}
+
 .buttons {
+    flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 1px;
+    padding: 1px;
 }
 
-.mainWrapper {
+    .buttons button {
+        flex: 1;
+        border: none;
+        background-color: lightgray;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
 
-    width: auto;
-    display: flex;
-    flex-direction: row;
-}
-
-.slidersWrapper {
-    max-width: 700px;
+.sliders {
+    flex: 3;
+    width: 100px;
     height: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap-reverse;
 }
 
-button {
-    border-radius: 100%;
-    align-items: stretch;
-    width: 250px;
-    height: 234px;
+.slider-block {
+    width: 280px;
+    height: 220px;
+}
+
+.custom-slider {
+    width: 100%;
+    height: 100%;
+    background-color: lightblue;
+    position: relative;
+    border: 1px solid black;
+    touch-action: none;
+}
+
+
+.thumb {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 70px;
+    background-color: dimgrey;
+    pointer-events: none;
 }
 
 .hide {
-    color: red;
     display: none;
     visibility: hidden;
 }
-
-.slidecontainer {
-    width: 700px;
-}
-
-.slidecontainerf {
-    width: 450px;
-    height: 300px;
-}
-
-.slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 950px;
-    height: 550px;
-    background: lightblue;
-    outline: none;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-}
-
-    .slider:hover {
-        opacity: 1;
-    }
-
-    .slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 200px;
-        height: 550px;
-        background: lightgrey;
-        cursor: pointer;
-    }
-
-    .slider::-moz-range-thumb {
-        width: 200px;
-        height: 700px;
-        background: lightgrey;
-        cursor: pointer;
-    }
-
-.sliderf {
-    transform: translateY(120px) translateX(-130px) rotate(90deg);
-    border: 2px solid black;
-    -webkit-appearance: none;
-    appearance: none;
-    width: 500px;
-    height: 250px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-}
-
-    .sliderf::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 100px;
-        height: 255px;
-        background: lightgrey;
-        cursor: pointer;
-    }
-
-    .sliderf::-moz-range-thumb {
-        border: 2px solid black;
-        width: 500px;
-        height: 250px;
-        background: lightgrey;
-        cursor: pointer;
-    }

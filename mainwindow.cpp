@@ -21,6 +21,7 @@ MainWindow::~MainWindow()
 }
 
 
+
 void MainWindow::processReceivedData(const QString &message) {
     auto doc = QJsonDocument::fromJson(message.toUtf8());
     if (!doc.isObject()) return;
@@ -36,8 +37,10 @@ void MainWindow::processReceivedData(const QString &message) {
     double brake  = p["brake"].toDouble();
     double clutch = p["clutch"].toDouble();
 
+    auto pressedButton = obj["pressedButton"].toString();
+
     qDebug() << "Tilt:" << y
-             << "Pedals:" << clutch << brake << gas;
+             << "Pedals:" << clutch << brake << gas << pressedButton;
 }
 
 void MainWindow::onUserConnected(QWebSocket *socket) {

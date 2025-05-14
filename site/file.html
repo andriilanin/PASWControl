@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,19 +8,24 @@
 </head>
 <body>
     <div class="mainWrapper">
-        <div class="slidersWrapper">
-        <button id="btnPerms">Включить датчики</button>
-        <!--<div id="status">Статус: <span id="wsState">Отключено</span></div>-->
-            <div class="slidecontainer">
-                <input id="clutch" type="range" class="slider" min="0" max="255" step="0.01" value="0">
+        
+        <div class="sliders">
+            <button id="btnPerms">turn sensors on</button>
+            <div class="slider-block">
+                <div class="custom-slider" id="clutch"><div class="thumb"></div></div>
             </div>
-            <div class="slidecontainer">
-                <input id="brake" type="range" class="slider" min="0" max="255" step="0.01" value="0">
+            <div class="slider-block">
+                <div class="custom-slider" id="brake"><div class="thumb"></div></div>
             </div>
-            <div class="slidecontainer">
-                <input id="gas" type="range" class="slider" min="0" max="255" step="0.01" value="0">
+            <div class="slider-block">
+                <div class="custom-slider" id="gas"><div class="thumb"></div></div>
             </div>
-
+        </div>
+        <div class="buttons">
+            <button id="btn1"></button>
+            <button id="btn2"></button>
+            <button id="btn3"></button>
+            <button id="btn4"></button>
         </div>
     </div>
     <script src="script.js"></script>
