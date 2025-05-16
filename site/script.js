@@ -19,10 +19,10 @@ function setupSlider(sliderElem, id) {
 
     function setValueFromX(x) {
         const rect = sliderElem.getBoundingClientRect();
-        let relativeX = x - rect.left;
+        let relativeX = x - rect.left-60;
         relativeX = Math.max(0, Math.min(relativeX, width-70));
         const rawValue = relativeX / width;
-        const value255 = Math.round(rawValue * 300);
+        const value255 = Math.round(rawValue * 340);
         pedals[id] = value255;
         thumb.style.left = `${rawValue * 100}%`;
     }

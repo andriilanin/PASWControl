@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "vjoydevice.h"
+#include "steeringwheelwidget.h"
+#include "axissmoother.h"
 #include <QWebSocket>
 
 QT_BEGIN_NAMESPACE
@@ -19,6 +21,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
 signals:
     void UserConnected(QWebSocket *socket);
     void UserDisconnected();
@@ -32,5 +35,7 @@ public slots:
 private:
     Ui::MainWindow *ui;
     VJoyDevice* joyEmu = nullptr;
+    AxisSmoother* axisSmoother = nullptr;
+    SteeringWheelWidget *wheelImagination;
 };
 #endif // MAINWINDOW_H

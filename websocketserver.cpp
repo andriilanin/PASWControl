@@ -10,7 +10,7 @@ WebSocketServer::WebSocketServer(quint16 port,
                                  const QString &keyPath,
                                  QObject *parent)
     : QObject(parent)
-    , m_server(new QWebSocketServer(QStringLiteral("SSLServer"),
+    , server(new QWebSocketServer(QStringLiteral("SSLServer"),
                                     QWebSocketServer::SecureMode,
                                     this))
 {
@@ -25,24 +25,24 @@ WebSocketServer::WebSocketServer(quint16 port,
     certFile.close();
     keyFile.close();
 
-    QSslConfiguration sslConfig = m_server->sslConfiguration();
+    QSslConfiguration sslConfig = server->sslConfiguration();
     sslConfig.setLocalCertificate(cert);
     sslConfig.setPrivateKey(key);
     sslConfig.setPeerVerifyMode(QSslSocket::VerifyNone);
-    m_server->setSslConfiguration(sslConfig);
+    server->setSslConfiguration(sslConfig);
 
-    if (!m_server->listen(QHostAddress::Any, port)) {
+    if (!server->listen(QHostAddress::Any, port)) {
         qFatal("Failed to start SSL server on port %u", port);
     }
 
-    connect(m_server, &QWebSocketServer::newConnection,
+    connect(server, &QWebSocketServer::newConnection,
             this, &WebSocketServer::onNewConnection);
     qInfo() << "SSL WebSocket Server listening on port" << port;
 }
 
 void WebSocketServer::onNewConnection()
 {
-    socket = m_server->nextPendingConnection();
+    socket = server->nextPendingConnection();
     emit userConnected(socket);
     qInfo() << "Client connected from" << socket->peerAddress().toString();
     connect(socket, &QWebSocket::disconnected, socket, &QWebSocket::deleteLater);

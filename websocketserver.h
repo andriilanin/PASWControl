@@ -25,7 +25,7 @@ public slots:
 
 
 private:
-    QWebSocketServer *m_server;
+    QWebSocketServer *server;
 
 
 };

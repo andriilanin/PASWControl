@@ -14,6 +14,7 @@ public:
     bool setAxis(LONG value, UINT axis);
     bool setButton(bool pressed, UINT button);
 
+
 private:
     UINT m_id;
     bool m_acquired;

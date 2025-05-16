@@ -9,13 +9,17 @@ INCLUDEPATH += "$$PWD/vJoySDK/inc"
 LIBS += -L$$PWD/vJoySDK/inc -lvJoyInterface
 
 SOURCES += \
+    axissmoother.cpp \
     main.cpp \
     mainwindow.cpp \
+    steeringwheelwidget.cpp \
     vjoydevice.cpp \
     websocketserver.cpp
 
 HEADERS += \
+    axissmoother.h \
     mainwindow.h \
+    steeringwheelwidget.h \
     vjoydevice.h \
     websocketserver.h
 
