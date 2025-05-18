@@ -6,6 +6,11 @@ fetch('/hostIP')
         hostIP = data.hostIP;
         const WS_URL = `wss://${hostIP}:12345/`;
         ws = new WebSocket(WS_URL);
+        ws.addEventListener('close', () => {
+            document.querySelectorAll('.custom-slider').forEach(slider => {
+                slider.classList.toggle("disconnected");
+            });
+        });
     })
     .catch(err => console.error('error receiving hostIP:', err));
 
@@ -47,18 +52,30 @@ document.querySelectorAll('.custom-slider').forEach(slider => {
 
 document.getElementById('btn1').addEventListener('pointerdown', () => {
     pressedButton = "btn1";
+    //setTimeout(() => {
+    //    pressedButton = "";
+    //}, 250);
 });
 
 document.getElementById('btn2').addEventListener('pointerdown', () => {
     pressedButton = "btn2";
+    //setTimeout(() => {
+    //    pressedButton = "";
+    //}, 250);
 });
 
 document.getElementById('btn3').addEventListener('pointerdown', () => {
     pressedButton = "btn3";
+    //setTimeout(() => {
+    //    pressedButton = "";
+    //}, 250);
 });
 
 document.getElementById('btn4').addEventListener('pointerdown', () => {
     pressedButton = "btn4";
+    //setTimeout(() => {
+    //    pressedButton = "";
+    //}, 250);
 });
 
 document.getElementById('btnPerms').addEventListener('click', () => {
@@ -86,4 +103,4 @@ setInterval(() => {
     const msg = { type: 'sensor_update', tilt, pedals, pressedButton, timestamp: Date.now() };
     ws.send(JSON.stringify(msg));
     pressedButton = "";
-}, 50);
+}, 25);

@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
     QObject::connect(&a, &QCoreApplication::aboutToQuit, [=]() {
         nodeProcess->close();
     });
+    QObject::connect(&a, &QCoreApplication::aboutToQuit, &w, &MainWindow::onQuit);
 
     return a.exec();
 }

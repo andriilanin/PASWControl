@@ -9,7 +9,7 @@ SteeringWheelWidget::SteeringWheelWidget(QWidget *parent)
 }
 
 void SteeringWheelWidget::setValue(int newValue) {
-    if (newValue >= -10 && newValue <= 10) {
+    if (newValue >= -32768 && newValue <= 32768) {
         value = newValue;
         update();
     }
@@ -19,7 +19,7 @@ void SteeringWheelWidget::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    int angle = static_cast<int>(((value + 10) / 20.0) * 180.0 - 90.0);
+    int angle = static_cast<int>(((value + 32768) / 65536.0) * 180.0 - 90.0);
 
     QPixmap scaled = wheelPixmap.scaled(size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
 

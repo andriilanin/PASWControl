@@ -6,6 +6,7 @@
 #include "steeringwheelwidget.h"
 #include "axissmoother.h"
 #include <QWebSocket>
+#include <QSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,12 +31,16 @@ public slots:
     void onUserConnected(QWebSocket *socket);
     void onUserDisconnected();
     void processReceivedData(const QString &message);
+    void onQuit();
 
+private slots:
+    void setSmoothnessValue(int value);
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow* ui;
+    QSettings settings;
     VJoyDevice* joyEmu = nullptr;
     AxisSmoother* axisSmoother = nullptr;
-    SteeringWheelWidget *wheelImagination;
+    SteeringWheelWidget* wheelImagination;
 };
 #endif // MAINWINDOW_H

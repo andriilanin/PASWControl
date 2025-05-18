@@ -65,3 +65,7 @@ body {
     display: none;
     visibility: hidden;
 }
+
+.disconnected {
+    background-color: indianred;
+}
