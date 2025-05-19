@@ -9,6 +9,7 @@
 #include <QNetworkInterface>
 #include <QSlider>
 #include <QSettings>
+#include <QProcess>
 
 #define STICK_MAX_VALUE 32768.0f
 #define PEDAL_MAX_VALUE 255.0f
@@ -46,13 +47,17 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->invertedTiltCheckBox->setChecked(settings.value("invertTilt", false).toBool());
 
-    setSmoothnessValue(settings.value("smoothnessValue", 0).toInt());
-    ui->smoothnessSlider->setValue(settings.value("smoothnessValue", 0).toInt());
-    ui->smoothnessValueLabel->setText(settings.value("smoothnessValue", 0).toString()+"%");
+    setSmoothnessValue(settings.value("smoothnessValue", 75).toInt());
+    ui->smoothnessSlider->setValue(settings.value("smoothnessValue", 75).toInt());
+    ui->smoothnessValueLabel->setText(settings.value("smoothnessValue", 75).toString()+"%");
 
-    setLinearityValue(settings.value("linearityValue", 0).toInt());
-    ui->linearitySlider->setValue(settings.value("linearityValue", 0).toInt());
-    ui->linearityValueLabel->setText(settings.value("linearityValue", 0).toString()+"%");
+    setLinearityValue(settings.value("linearityValue", 25).toInt());
+    ui->linearitySlider->setValue(settings.value("linearityValue", 25).toInt());
+    ui->linearityValueLabel->setText(settings.value("linearityValue", 25).toString()+"%");
+
+    connect(ui->calibrateButton, &QPushButton::clicked, []() {
+        QProcess::startDetached("control", QStringList() << "joy.cpl");
+    });
 }
 
 MainWindow::~MainWindow()
