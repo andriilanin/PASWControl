@@ -44,14 +44,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->siteIpLabel->setText("https://"+getLocalIPv4Address()+":3003");
 
-
-
     ui->invertedTiltCheckBox->setChecked(settings.value("invertTilt", false).toBool());
 
     setSmoothnessValue(settings.value("smoothnessValue", 0).toInt());
     ui->smoothnessSlider->setValue(settings.value("smoothnessValue", 0).toInt());
     ui->smoothnessValueLabel->setText(settings.value("smoothnessValue", 0).toString()+"%");
 
+    setLinearityValue(settings.value("linearityValue", 0).toInt());
     ui->linearitySlider->setValue(settings.value("linearityValue", 0).toInt());
     ui->linearityValueLabel->setText(settings.value("linearityValue", 0).toString()+"%");
 }
@@ -114,12 +113,13 @@ void MainWindow::onUserDisconnected() {
 };
 
 void MainWindow::setSmoothnessValue(int value) {
-    this->axisSmoother->setSmoothness(1.0f-(value/100.0f));
+    this->axisSmoother->setSmoothnessAlpha(1.0f-(value/100.0f));
     ui->smoothnessValueLabel->setText(QString::number(value)+"%");
 
 };
 
 void MainWindow::setLinearityValue(int value) {
+    this->axisSmoother->setLinearityAlpha(1.0f-(value/100.0f));
     ui->linearityValueLabel->setText(QString::number(value)+"%");
 };
 
