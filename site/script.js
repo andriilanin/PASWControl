@@ -52,30 +52,18 @@ document.querySelectorAll('.custom-slider').forEach(slider => {
 
 document.getElementById('btn1').addEventListener('pointerdown', () => {
     pressedButton = "btn1";
-    //setTimeout(() => {
-    //    pressedButton = "";
-    //}, 250);
 });
 
 document.getElementById('btn2').addEventListener('pointerdown', () => {
     pressedButton = "btn2";
-    //setTimeout(() => {
-    //    pressedButton = "";
-    //}, 250);
 });
 
 document.getElementById('btn3').addEventListener('pointerdown', () => {
     pressedButton = "btn3";
-    //setTimeout(() => {
-    //    pressedButton = "";
-    //}, 250);
 });
 
 document.getElementById('btn4').addEventListener('pointerdown', () => {
     pressedButton = "btn4";
-    //setTimeout(() => {
-    //    pressedButton = "";
-    //}, 250);
 });
 
 document.getElementById('btnPerms').addEventListener('click', () => {

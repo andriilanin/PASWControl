@@ -256,7 +256,7 @@ QProgressBar::chunk {
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <property name="spacing">
-      <number>0</number>
+      <number>5</number>
      </property>
      <property name="sizeConstraint">
       <enum>QLayout::SizeConstraint::SetNoConstraint</enum>
@@ -374,6 +374,101 @@ QSlider::add-page:horizontal {
          </property>
          <property name="text">
           <string>75%</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="linearityLayout">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="linearityLabel">
+         <property name="maximumSize">
+          <size>
+           <width>68</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text">
+          <string notr="true">Linearity: </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="linearitySlider">
+         <property name="minimumSize">
+          <size>
+           <width>281</width>
+           <height>15</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>281</width>
+           <height>15</height>
+          </size>
+         </property>
+         <property name="baseSize">
+          <size>
+           <width>281</width>
+           <height>15</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QSlider {
+    background: transparent;
+}
+
+QSlider::groove:horizontal {
+    height: 6px;
+    background: #444;
+    border-radius: 3px;
+}
+
+QSlider::handle:horizontal {
+    width: 7px;
+    background: white;
+    border: 1px solid #999;
+    margin: -5px 0;
+}
+
+QSlider::sub-page:horizontal {
+    background: rgb(0, 0, 0);
+    border-radius: 3px;
+}
+
+QSlider::add-page:horizontal {
+    background: rgb(0, 0, 0);
+    border-radius: 3px;
+}</string>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="linearityValueLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>30</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0%</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
