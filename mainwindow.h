@@ -35,6 +35,7 @@ public slots:
 
 private slots:
     void setSmoothnessValue(int value);
+    void setLinearityValue(int value);
 
 private:
     Ui::MainWindow* ui;

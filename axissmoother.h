@@ -7,10 +7,10 @@ public:
 
     int update(float input);
 
-    void setAlpha(float alpha);
+    void setSmoothnessAlpha(float alpha);
 
 private:
-    float alpha;
+    float smoothnessAlpha;
     float prev;
 };
 

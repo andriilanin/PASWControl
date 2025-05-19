@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->axisSmoother = new AxisSmoother(1.0f);
 
     connect(ui->smoothnessSlider, &QSlider::sliderMoved, this, &MainWindow::setSmoothnessValue);
+    connect(ui->linearitySlider, &QSlider::sliderMoved, this, &MainWindow::setLinearityValue);
 
     wheelImagination = new SteeringWheelWidget(this);
     ui->wheelVisualisationLayout->addWidget(wheelImagination);
@@ -46,10 +47,13 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     ui->invertedTiltCheckBox->setChecked(settings.value("invertTilt", false).toBool());
+
     setSmoothnessValue(settings.value("smoothnessValue", 0).toInt());
     ui->smoothnessSlider->setValue(settings.value("smoothnessValue", 0).toInt());
     ui->smoothnessValueLabel->setText(settings.value("smoothnessValue", 0).toString()+"%");
 
+    ui->linearitySlider->setValue(settings.value("linearityValue", 0).toInt());
+    ui->linearityValueLabel->setText(settings.value("linearityValue", 0).toString()+"%");
 }
 
 MainWindow::~MainWindow()
@@ -110,16 +114,20 @@ void MainWindow::onUserDisconnected() {
 };
 
 void MainWindow::setSmoothnessValue(int value) {
-    qDebug() << value;
-    this->axisSmoother->setAlpha(1.0f-(value/100.0f));
+    this->axisSmoother->setSmoothness(1.0f-(value/100.0f));
     ui->smoothnessValueLabel->setText(QString::number(value)+"%");
 
+};
+
+void MainWindow::setLinearityValue(int value) {
+    ui->linearityValueLabel->setText(QString::number(value)+"%");
 };
 
 
 void MainWindow::onQuit() {
     settings.setValue("invertTilt", ui->invertedTiltCheckBox->checkState());
     settings.setValue("smoothnessValue", ui->smoothnessSlider->value());
+    settings.setValue("linearityValue", ui->linearitySlider->value());
 
 };
 
