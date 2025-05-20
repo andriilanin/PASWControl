@@ -17,7 +17,7 @@ PASW Control is a program that transforms your smartphone into a comprehensive s
 
 * [🚀 Features](#-features)
 * [📦 Tech Stack](#-tech-stack)
-* [⚙️ Installation](#-installation)
+* [⚙️ Installation](#%EF%B8%8F-installation)
 * [🎮 Usage](#-usage)
 * [🔧 Configuration](#-configuration)
 * [🤝 Contributing](#-contributing)
