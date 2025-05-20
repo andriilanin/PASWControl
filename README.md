@@ -45,35 +45,50 @@ PASW Control is a program that transforms your smartphone into a comprehensive s
 
 ## ⚙️ Installation
 
-1. **Download setup from latest releases**
+1. **Download setup from latest releases.**
 
-2. **Open setup, choose application installation folder, click "Next"**
+2. **Open setup, choose application installation folder, click "Next".**
 
-3. **Click on "Create a desktop shortcut", then click "Next"**
+3. **Click on "Create a desktop shortcut", then click "Next".**
 
-4. **Click install**
+4. **Click install.**
 
-5. **Follow "NodeJS Setup Wizard" and "vJoy Device Driver Setup Wizard"(Next just click "Next" and "Install")**
+5. **Follow "NodeJS Setup Wizard" and "vJoy Device Driver Setup Wizard"(Next just click "Next" and "Install").**
 
-6. **DO NOT CHANGE ANY PATH OR CHECKBOXES, EXCEPT LICENSE AGREEMENT**
+6. **DO NOT CHANGE ANY PATH OR CHECKBOXES, EXCEPT LICENSE AGREEMENT.**
 
-7. **Click "Finish"**
+7. **Click "Finish".**
 
 ## 🎮 Usage
 
 1. **Connecting**
-
+   
    * Ensure both your PC and smartphone are on the same local network(same WIFI).
    * Run the desktop app first.
    * Open the displayed URL (e.g., `https://192.168.0.10:3003`) in your phone’s browser(Don`t use Safari).
 
-2. **Controls**
+2. **Calibration** (You need to do it once, after installation.)
+  * **Go to:**
+  * **"Calibrate"**
+  * **"vJoy Device"**
+  * **"Properties"**
+  * **"Settings"**
+  * **"calibrate"**
+  * **Click "Next" until you see a white square with a cross.**
+  * **Slowly tilt the phone left and right to the same angle (it is recommended to use a flat surface to achieve an angle of no more than 90 degrees).**
+  * **Click "Next" until you see "X Rotation", then on phone move the right slider to the end and back.**
+  * **Click "Next" until you see "Y Rotation", then on phone move the central slider to the end and back.**
+  * **Click "Next" until you see "Z Rotation", then on phone move the left slider to the end and back.**
+  * **Click "Next", then "finish".**
+  * **Click "Apply", then close these windows.**
+
+3. **Controls**
 
    * **Sliders:** Clutch, Brake, Throttle (multi-touch enabled).
    * **Buttons:** Four customizable action buttons.
    * **Steering:** Tilt your phone to control the wheel.
 
-3. **Live Dashboard**
+4. **Live Dashboard**
 
    * Monitor connection status, slider values, and steering angle on your PC.
 
